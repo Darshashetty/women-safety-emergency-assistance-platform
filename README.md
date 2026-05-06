@@ -90,9 +90,38 @@ The platform is designed around a simple flow: a user triggers SOS, the backend 
 
 | Platform | Purpose |
 |---|---|
-| Vercel | Frontend hosting |
-| Render | Backend hosting |
-| MongoDB Atlas | Managed MongoDB deployment |
+| Vercel | Frontend hosting and public demo delivery |
+| Render | Backend API hosting |
+| MongoDB Atlas | Managed MongoDB Atlas cloud database configured for production. |
+
+## Live Demo
+
+The production deployment is available at the links below:
+
+| Service | Production URL |
+|---|---|
+| Frontend Demo | https://women-safety-emergency-assistance-p.vercel.app |
+| Backend API | https://aurasafe-backend.onrender.com |
+
+## Backend API
+
+The backend is hosted on Render and serves the REST API, authentication, Socket.IO events, and MongoDB-backed emergency workflows.
+
+| Item | Value |
+|---|---|
+| Production API Base URL | https://aurasafe-backend.onrender.com |
+| Real-time Socket URL | https://aurasafe-backend.onrender.com |
+| Database | Managed MongoDB Atlas cloud database configured for production. |
+
+## Production Deployment Architecture
+
+AuraSafe uses a straightforward production stack for reliability and separation of concerns:
+
+1. **Vercel** hosts the React frontend and serves the public demo URL.
+2. **Render** hosts the Node.js and Express backend API, including Socket.IO.
+3. **MongoDB Atlas** stores users, alerts, safety zones, and response history in a managed cloud database.
+
+The frontend reads the backend endpoint from `VITE_API_URL`, so both axios requests and Socket.IO connections target the same deployed API in production while still falling back to localhost during local development.
 
 ## System Architecture
 
@@ -198,13 +227,13 @@ flowchart LR
 
 ## Live Demo
 
-The deployment targets below are ready for final hosting links:
+The deployment targets below point to the production services used by the platform:
 
 | Target | URL |
 |---|---|
-| Frontend Demo | https://your-vercel-app.vercel.app |
-| Backend API | https://your-render-app.onrender.com |
-| MongoDB Atlas | Managed cluster configured in production |
+| Frontend Demo | https://women-safety-emergency-assistance-p.vercel.app |
+| Backend API | https://aurasafe-backend.onrender.com |
+| MongoDB Atlas | Managed MongoDB Atlas cloud database configured for production. |
 
 ## Project Folder Structure
 
@@ -307,13 +336,13 @@ npm run dev
 
 ### Frontend Environment Variables
 
-Create `frontend/.env` if you want to externalize the API URL for deployment:
+Create `frontend/.env` to define the backend URL used by Vite builds and local development:
 
 ```env
-VITE_API_URL=http://localhost:5005
+VITE_API_URL=https://aurasafe-backend.onrender.com
 ```
 
-Note: the current client uses a local API base URL in `src/utils/api.js`. For production deployment, switch that base URL to the deployed backend or wire it to `VITE_API_URL`.
+For local development, you can set `VITE_API_URL=http://localhost:5005`. The frontend automatically uses `import.meta.env.VITE_API_URL` for axios and Socket.IO connections.
 
 ## Environment Variables
 
@@ -416,8 +445,8 @@ The interface is built with a mobile-first mindset.
 2. Import the repository into Vercel.
 3. Set the build command to `npm run build`.
 4. Set the output directory to `dist`.
-5. Add `VITE_API_URL` in the Vercel environment variables.
-6. Ensure the deployed frontend points to the deployed backend URL.
+5. Add `VITE_API_URL=https://aurasafe-backend.onrender.com` in the Vercel environment variables.
+6. Redeploy to confirm the frontend points to the production backend.
 
 ### Backend on Render
 
@@ -425,7 +454,8 @@ The interface is built with a mobile-first mindset.
 2. Create a new Render Web Service.
 3. Set the start command to `node index.js`.
 4. Add `PORT`, `MONGO_URI`, `JWT_SECRET`, and `CLIENT_URL` in Render environment settings.
-5. Make sure the Render service can reach MongoDB Atlas.
+5. Make sure `CLIENT_URL` includes the Vercel production domain so CORS and Socket.IO remain aligned.
+6. Confirm the service can reach MongoDB Atlas.
 
 ### MongoDB Atlas Setup
 
