@@ -39,6 +39,8 @@ build/Release
 
 # Dependency directories
 node_modules/
+backend/node_modules/
+frontend/node_modules/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -69,6 +71,10 @@ web_modules/
 .env
 .env.*
 !.env.example
+backend/.env
+frontend/.env
+backend/.env.local
+frontend/.env.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -82,6 +88,7 @@ out
 .nuxt
 dist
 .output
+frontend/dist/
 
 # Gatsby files
 .cache/
@@ -141,3 +148,8 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Local files
+*.local
+.DS_Store
+Thumbs.db
