@@ -164,16 +164,37 @@ flowchart LR
 
 ## Screenshots
 
-Screenshots are stored in `frontend/public/screenshots/` and are used directly in the README.
+### Authentication
 
+**Login Page** - Secure JWT-based authentication interface
 ![Login Page](frontend/public/screenshots/login-page.png)
+
+**Register Page** - User, volunteer, and admin registration
 ![Register Page](frontend/public/screenshots/register-page.png)
+
+### User Dashboard
+
+**User Dashboard** - SOS triggering, emergency contacts, and alert history
 ![User Dashboard](frontend/public/screenshots/user-dashboard.png)
+
+### Volunteer Operations
+
+**Volunteer Dashboard** - Real-time alert queue and response coordination
 ![Volunteer Dashboard](frontend/public/screenshots/volunteer-dashboard.png)
-![Admin Dashboard](frontend/public/screenshots/admin-dashboard.png)
+
+**SOS Alert Workflow** - Live incident lifecycle from alert to completion
 ![SOS Alert Workflow](frontend/public/screenshots/sos-workflow.png)
-![Safety Zones Map](frontend/public/screenshots/safety-zones-map.png)
+
+### Admin & Safety Management
+
+**Admin Dashboard** - Platform analytics, user management, and operational oversight
+![Admin Dashboard](frontend/public/screenshots/admin-dashboard.png)
+
+**Analytics Dashboard** - Performance metrics and incident statistics
 ![Analytics Dashboard](frontend/public/screenshots/analytics-dashboard.png)
+
+**Safety Zones Map** - Emergency locations and safe area management
+![Safety Zones Map](frontend/public/screenshots/safety-zones-map.png)
 
 ## Live Demo
 
