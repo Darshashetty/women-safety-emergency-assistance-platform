@@ -16,6 +16,12 @@ module.exports = (io) => {
   });
 
   io.on('connection', async (socket) => {
+    // If authentication failed and socket.user is not set, disconnect gracefully
+    if (!socket.user) {
+      socket.disconnect(true);
+      return;
+    }
+
     // Mark user as online
     await User.findByIdAndUpdate(socket.user._id, { isOnline: true });
     io.emit('user-status-changed', { userId: socket.user._id, isOnline: true });
